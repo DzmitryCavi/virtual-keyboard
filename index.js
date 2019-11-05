@@ -1,5 +1,5 @@
 var VirtualKeyboard = {
-    generate: function(target, matrix, language, uppercase = false) {
+    generate: function(target, matrix, language, uppercase = false, shift = 'symbols') {
       var owner = this;
       
       for(var i = 0; i < matrix.length; i++) {
@@ -47,7 +47,16 @@ var VirtualKeyboard = {
               button.innerHTML = 'Space';
               button.setAttribute('data-trigger', 'space');
               button.setAttribute('title', 'Space');
-              button.style.width = '50%';
+              break;
+            case '+tab':
+              button.innerHTML = 'Tab';
+              button.setAttribute('data-trigger', 'tab');
+              button.setAttribute('title', 'tab');
+              break;
+             case '+enter':
+              button.innerHTML = 'Enter';
+              button.setAttribute('data-trigger', 'enter');
+              button.setAttribute('title', 'enter');
               break;
               
             default: 
@@ -72,10 +81,17 @@ var VirtualKeyboard = {
                 case 'space':
                   _lastElementFocused.value = _lastElementFocused.value + ' ';
                   break;
+                case 'tab':
+                  _lastElementFocused.value = _lastElementFocused.value + '\t';
+                  break;
+                case 'enter':
+                  _lastElementFocused.value = _lastElementFocused.value + '\n';
+                  break;
                 case 'shift':
                   var u = uppercase === true ? false : true;
+                  var s = shift === 'num' ? 'symbols' : 'num';
                   target.innerHTML = '';
-                  owner.generate(target,owner.getMatrix(language), language, u);
+                  owner.generate(target,owner.getMatrix(language,shift), language, u, s);
                   break;
                       }
             }
@@ -84,31 +100,28 @@ var VirtualKeyboard = {
             }
           });
           vkc.appendChild(button);
-  
           vkr.appendChild(vkc);
           target.appendChild(vkr);
         }
       }
     },
-    getMatrix: function(language) {
+    getMatrix: function(language,shift = 'num') {
       var matrix = {
+        symbols: [['!','@','$','%','^','&','*','(',')','_','+']],
+        num: [['1','2','3','4','5','6','7','8','9','0']],
         en: [
-        ['!','@','$','%','^','&','*','(',')','_','+'],
-        ['1','2','3','4','5','6','7','8','9','0','+backspace'],
-        ['q','w','e','r','t','y','u','i','o','p','-'],
-        ['+tab','a','s','d','f','g','h','j','k','l','+'],
+        ['q','w','e','r','t','y','u','i','o','p'],
+        ['+tab','a','s','d','f','g','h','j','k','l'],
         ['+shift','z','x','c','v','b','n','m','.',','],
-        ['+space','+international']
+        ['+international','+space','+backspace','+enter']
       ],
         ru: [
-          ['!','#','№',';','%',':','?','*','(',')','='],
-          ['1','2','3','4','5','6','7','8','9','0','+backspace'],
           ['й','ц','у','к','е','н','г','ш','щ','з','х','ъ'],
           ['+tab','ф','ы','в','а','п','р','о','л','д','ж','э'],
           ['+shift','я','ч','с','м','и','т','ь','б','ю','ё','.',','],
-          ['+space','+international']
+          ['+international','+space','+backspace','+enter']
         ]};
-      return matrix[language];
+      return matrix[shift].concat(matrix[language]);
     },
     init: function(args) {
       if (args != undefined && args != null) {
@@ -138,14 +151,15 @@ var VirtualKeyboard = {
   a.setAttribute('id','tabular-virtual-keyboard');
   document.getElementsByTagName('body')[0].appendChild(a);
   VirtualKeyboard.init({targetId: 'tabular-virtual-keyboard', defaultLanguage: 'en', inputSelector: '[data-virtual-element]'});
+ 
   document.addEventListener('keypress',(event)=>{
     let buttons = document.getElementsByClassName('virtual-keyboard-button');
     for(let i =0; i<buttons.length;i++){
-        if(buttons[i].innerHTML == event.key){
+        if( buttons[i].innerHTML == event.key){
             buttons[i].style = "background-color: white";
             setTimeout(()=>{buttons[i].removeAttribute('style');},500);
-            
-        }  
+            console.log(buttons[i].innerHTML+"  "+event.key);
+        } 
     }
     
-})
+  })
