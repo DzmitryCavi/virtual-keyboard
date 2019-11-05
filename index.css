@@ -3,7 +3,7 @@ textarea {
   margin: auto;
   width: 80%;
 }
-#tabular-virtual-keyboard {
+#virtual-keyboard {
   width: 80%;
   display: table;
   padding: 0;
@@ -12,12 +12,12 @@ textarea {
   text-align: center;
 }
 
-#tabular-virtual-keyboard > .virtual-keyboard-row {
+#virtual-keyboard > .virtual-keyboard-row {
   display: table-row;  
   text-align: center;
 }
 
-#tabular-virtual-keyboard > .virtual-keyboard-row > .virtual-keyboard-column {
+#virtual-keyboard > .virtual-keyboard-row > .virtual-keyboard-column {
   display: table-cell;
   vertical-align: middle;
 }

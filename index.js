@@ -147,10 +147,15 @@ var VirtualKeyboard = {
     }
   }
 
-  let a =  document.createElement('div');
-  a.setAttribute('id','tabular-virtual-keyboard');
-  document.getElementsByTagName('body')[0].appendChild(a);
-  VirtualKeyboard.init({targetId: 'tabular-virtual-keyboard', defaultLanguage: 'en', inputSelector: '[data-virtual-element]'});
+  let Keyboard =  document.createElement('div');
+  let Input = document.createElement('textarea');
+  Input.setAttribute('data-virtual-element','');
+  Input.setAttribute('cols','30');
+  Input.setAttribute('rows','10');
+  Keyboard.setAttribute('id','virtual-keyboard');
+  document.getElementsByTagName('body')[0].appendChild(Input);
+  document.getElementsByTagName('body')[0].appendChild(Keyboard);
+  VirtualKeyboard.init({targetId: 'virtual-keyboard', defaultLanguage: 'en', inputSelector: '[data-virtual-element]'});
  
   document.addEventListener('keypress',(event)=>{
     let buttons = document.getElementsByClassName('virtual-keyboard-button');
