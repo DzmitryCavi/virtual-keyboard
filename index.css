@@ -5,11 +5,9 @@ textarea {
 }
 #tabular-virtual-keyboard {
   width: 80%;
-  box-shadow: 0 3px 6px rgba(51,51,51,0.16);
   display: table;
   padding: 0;
   margin: 0 auto;
-  width: auto;
   color: #f1f1f1;
   border: 2px solid gray;
   text-align: center;
@@ -28,21 +26,20 @@ textarea {
 
 .virtual-keyboard-button {
   box-shadow: 0 2px 3px rgba(51,51,51,0.30);
-  border: 2px solid #923922;
-  font-size: 18px;
+  border: 2px solid black;
+  font-size: 2rem;
   color: #f1f1f1;
-  background-color: #b7472a;
-  background: linear-gradient(to top, #923922 20px, #b7472a 20px);
-  background: -webkit-linear-gradient(bottom, #923922 20px, #b7472a 20px);
+  background-color: darkblue;
   cursor: pointer;
   padding: 0;
   display: inline-block;
-  margin: 4px;
+  margin: 5px;
   outline: 0;
   text-decoration: none;
   border-radius: 4px;
-  width: 48px;
-  height: 48px;
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
   text-shadow: -1px 1px 1px #333;
   transition: all .1s ease-out;
 }
