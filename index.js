@@ -157,7 +157,8 @@ var VirtualKeyboard = {
   document.getElementsByTagName('body')[0].appendChild(Keyboard);
   VirtualKeyboard.init({targetId: 'virtual-keyboard', defaultLanguage: 'en', inputSelector: '[data-virtual-element]'});
  
-  document.addEventListener('keypress',(event)=>{
+  document.addEventListener('keydown',(event)=>{
+    if(event.key == "Tab") event.preventDefault();
     let buttons = document.getElementsByClassName('virtual-keyboard-button');
     for(let i =0; i<buttons.length;i++){
         if( buttons[i].innerHTML == event.key){
