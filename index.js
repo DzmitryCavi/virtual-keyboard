@@ -1,7 +1,6 @@
 var VirtualKeyboard = {
     generate: function(target, matrix, language, uppercase = false, shift = 'symbols') {
       var owner = this;
-      
       for(var i = 0; i < matrix.length; i++) {
         var position = matrix[i];
         
@@ -75,6 +74,7 @@ var VirtualKeyboard = {
                   break;
                 case 'international':
                   var reversed = language === 'en'? 'ru' : 'en';
+				  localStorage.setItem('language', language === 'en'? 'ru' : 'en');
                   target.innerHTML = '';
                   owner.generate(target,owner.getMatrix(reversed), reversed);
                   break;
@@ -146,24 +146,26 @@ var VirtualKeyboard = {
       }
     }
   }
-
+  let myStorage = window.localStorage; 
   let Keyboard =  document.createElement('div');
   let Input = document.createElement('textarea');
+  let defLang = myStorage.getItem('language');
   Input.setAttribute('data-virtual-element','');
   Input.setAttribute('cols','30');
   Input.setAttribute('rows','10');
   Keyboard.setAttribute('id','virtual-keyboard');
   document.getElementsByTagName('body')[0].appendChild(Input);
   document.getElementsByTagName('body')[0].appendChild(Keyboard);
-  VirtualKeyboard.init({targetId: 'virtual-keyboard', defaultLanguage: 'en', inputSelector: '[data-virtual-element]'});
+  VirtualKeyboard.init({targetId: 'virtual-keyboard', defaultLanguage: defLang == null ? 'en' : defLang, inputSelector: '[data-virtual-element]'});
  
   document.addEventListener('keydown',(event)=>{
-    if(event.key == "Tab") event.preventDefault();
+	if(event.key == "Tab") event.preventDefault();
     let buttons = document.getElementsByClassName('virtual-keyboard-button');
     for(let i =0; i<buttons.length;i++){
         if( buttons[i].innerHTML == (event.key == ' ' ? 'Space': event.key)){
             buttons[i].style = "background-color: white";
             setTimeout(()=>{buttons[i].removeAttribute('style');},500);
+            console.log(buttons[i].innerHTML+"  "+event.key);
         } 
     }
     
