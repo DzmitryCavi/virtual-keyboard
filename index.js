@@ -161,10 +161,9 @@ var VirtualKeyboard = {
     if(event.key == "Tab") event.preventDefault();
     let buttons = document.getElementsByClassName('virtual-keyboard-button');
     for(let i =0; i<buttons.length;i++){
-        if( buttons[i].innerHTML == event.key){
+        if( buttons[i].innerHTML == (event.key == ' ' ? 'Space': event.key)){
             buttons[i].style = "background-color: white";
             setTimeout(()=>{buttons[i].removeAttribute('style');},500);
-            console.log(buttons[i].innerHTML+"  "+event.key);
         } 
     }
     
