@@ -1,0 +1,56 @@
+textarea {
+  display: block;
+  margin: auto;
+  width: 80%;
+}
+#virtual-keyboard {
+  width: 80%;
+  display: table;
+  padding: 0;
+  margin: 0 auto;
+  color: #f1f1f1;
+  text-align: center;
+}
+
+#virtual-keyboard > .virtual-keyboard-row {
+  display: table-row;  
+  text-align: center;
+}
+
+#virtual-keyboard > .virtual-keyboard-row > .virtual-keyboard-column {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+
+.virtual-keyboard-button {
+  box-shadow: 0 2px 3px rgba(51,51,51,0.30);
+  border: 2px solid black;
+  font-size: 2em;
+  color: #f1f1f1;
+  background-color: darkblue;
+  cursor: pointer;
+  padding: 0;
+  display: inline-block;
+  margin: 1px;
+  outline: 0;
+  text-decoration: none;
+  border-radius: 4px;
+  width: fit-content;
+  padding: 10px;
+  text-shadow: -1px 1px 1px #333;
+  transition: all .1s ease-out;
+}
+
+.virtual-keyboard-button:hover {
+  border: 2px solid #f1f1f1;
+  box-shadow: 0px 0px 10px rgba(241,241,241,0.30);
+}
+
+.virtual-keyboard-button:active,
+.virtual-keyboard-button:focus {
+  background: #f1f1f1;
+  color: #666;
+  box-shadow: 0px 0px 10px rgba(241,241,241,0.30);
+  text-shadow: 1px 0px 0px #333;
+}
